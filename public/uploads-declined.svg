@@ -1,0 +1,5 @@
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="25.2264" cy="25" rx="24.5283" ry="25" fill="white"/>
+<path d="M16.3962 22L25.2264 15L34.0566 22V33C34.0566 33.5304 33.8499 34.0391 33.4819 34.4142C33.1139 34.7893 32.6148 35 32.0944 35H18.3585C17.8381 35 17.339 34.7893 16.971 34.4142C16.603 34.0391 16.3962 33.5304 16.3962 33V22Z" stroke="#FF0303" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M22.2831 35V25H28.1699V35" stroke="#FF0303" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
