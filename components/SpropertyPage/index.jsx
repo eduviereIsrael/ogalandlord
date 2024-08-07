@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { setEditListing } from "@/lib/store/slices/listingEdit.reducer";
 import { deleteListing } from "@/lib/store/slices/listingUpload.reducer";
 import { selectCurrentUser } from "@/lib/store/slices/user.reducer";
@@ -10,6 +10,9 @@ import { useRouter } from "next/navigation";
 const SpropertyPage = ({ listing }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const thumbnailContainerRef = useRef();
+
+  const [mainImage, setMainImage] = useState(0);
 
   const currentUser = useAppSelector(selectCurrentUser)
 
@@ -27,12 +30,12 @@ const SpropertyPage = ({ listing }) => {
   };
   const [options, setOptions] = useState(false);
 
-  const getPrimaryImage = () => {
+  const getPrimaryImage = useCallback(() => {
     return (
       listing.images.find((image) => image.fullPath === listing.primaryImage) ||
       listing.images[0]
     );
-  };
+  }, [listing.images, listing.primaryImage])
 
   const formatPrice = (price) => {
     // Remove any non-numeric characters except for the decimal point
@@ -81,6 +84,17 @@ const SpropertyPage = ({ listing }) => {
     }));
     setOptions(false)
   }
+
+
+  useEffect(() => {
+    // Calculate 100vw - 40px
+    setMainImage(getPrimaryImage().url);
+  }, [getPrimaryImage]);
+
+  const handleMouseEnterThumbnail = (url) => {
+    setMainImage(url)
+  };
+
 
   return (
     <div className="s-property-page">
@@ -143,36 +157,25 @@ const SpropertyPage = ({ listing }) => {
 
       <div className="gallery">
         <div className="main-image">
-          <img src={getPrimaryImage().url} alt="Main property" />
+          <img src={mainImage} alt="Main property" />
         </div>
-        <div className="thumbnail-images">
+        <div className="thumbnail-images" >
           {listing.images.map((image, index) => (
             <div
               key={index}
               className={`thumbnail ${index === 0 ? "active" : ""}`}
-            >
-              <img src={image.url} alt={`Property image ${index + 1}`} />
-            </div>
+              style={{
+                backgroundImage: `url(${image.url})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+          
+              }}
+              onClick={() => handleMouseEnterThumbnail(image.url)}
+            />
+            
           ))}
-          {/* {listing.images.map((image, index) => (
-            <div
-              key={index}
-              className={`thumbnail ${index === 0 ? "active" : ""}`}
-            >
-              <img src={image.url} alt={`Property image ${index + 1}`} />
-            </div>
-          ))}
-          {listing.images.map((image, index) => (
-            <div
-              key={index}
-              className={`thumbnail ${index === 0 ? "active" : ""}`}
-            >
-              <img src={image.url} alt={`Property image ${index + 1}`} />
-            </div>
-          ))} */}
-          {/* <div className="thumbnail">
-            <img src="image1-url" alt="Living room" />
-          </div> */}
+         
+          
         </div>
       </div>
 

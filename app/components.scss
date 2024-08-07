@@ -344,7 +344,7 @@ $black: #060606;
   align-items: center;
   gap: 8px;
   width: 100%;
-  padding: 10px 20px;
+  padding: 18px 20px;
   text-decoration: none;
   color: $pri-col;
   font-weight: bold;
@@ -362,6 +362,10 @@ $black: #060606;
     aspect-ratio: 1/1;
     color: #fff;
     fill: red;
+  }
+
+  @media (max-width: 768px){
+    padding: 18px 20px;
   }
 
 }
@@ -392,7 +396,7 @@ $black: #060606;
         align-items: center;
         gap: 8px;
         width: 100%;
-        padding: 10px 20px;
+        padding: 18px 20px;
         text-decoration: none;
         color: $pri-col;
         font-weight: bold;
@@ -440,7 +444,7 @@ $black: #060606;
       margin-top: 56px;
 
 
-      .card{
+      .thumbnail{
         width: 100%;
         display: flex;
         align-items: flex-start;
@@ -937,7 +941,7 @@ $black: #060606;
       justify-content: flex-start;
       flex-wrap: wrap;
 
-      .add-img-card{
+      .add-img-thumbnail{
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -1036,7 +1040,7 @@ $black: #060606;
 
 }
 
-.property-card {
+.property-thumbnail {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -1083,7 +1087,7 @@ $black: #060606;
     font-weight: 500;
     margin-bottom: 9px;
 
-    .property-card__indicator {
+    .property-thumbnail__indicator {
       width: 10px;
       height: 10px;
       border-radius: 50%;
@@ -1155,7 +1159,7 @@ $black: #060606;
 }
 
 .s-property-page {
-  padding: 42px 32px;
+  padding: 42px 20px;
 
   .header {
     display: flex;
@@ -1342,44 +1346,77 @@ $black: #060606;
       }
 
       @media (max-width: 768px){
-        height: auto;
+        height: 450px;
       }
     }
 
+    // .thumbnail-images {
+    //   width: 100%;
+    //   display: flex;
+    //   flex-direction: row;
+    //   // border: 1px solid;
+    //   flex-wrap: nowrap;
+    //   justify-content: flex-start;
+    //   align-items: flex-start;
+    //   padding-top: 25px;
+    //   overflow: auto;
+    //   gap: 40px;
+
+    //   .thumbnail {
+    //     width: 160px;
+    //     height: 110px;
+    //     // margin-right: 40px;
+    //     box-sizing: content-box;
+    //     border: 1px solid;
+    //   }
+ 
+    //   img {
+   
+    //     width: 105px;
+    //     height: 60%;
+    //     object-fit: cover;
+    //     border-radius: 8px;
+    //   }
+    // }
+
     .thumbnail-images {
-      width: 100%;
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap; /* Prevent wrapping */
+      padding-bottom: 8px;
 
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-gap: 10px;
-      // display: flex;
-      // flex-direction: row;
-      // flex-wrap: nowrap;
-      // height: 100%;
-      // border: 1px solid;
-      justify-content: space-between;
-      gap: 10px;
+    
+      &::-webkit-scrollbar {
+        height: 4px; /* Customize scrollbar height */
+        margin-top: 16px;
+      }
+    
+      &::-webkit-scrollbar-thumb {
+        background-color: #000000; /* Customize scrollbar thumb color */
+        border-radius: 4px;
+      }
+    
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Customize scrollbar thumb hover color */
+      }
+    }
+    
+    .thumbnail {
+      flex: 0 0 auto; /* Prevent the thumbnail from shrinking or growing */
+      width: 171px; /* Set a fixed width */
+      height: 122px; /* Set a fixed height */
+      background-size: cover;
+      background-position: center;
+      margin-right: 10px; /* Space between thumbnails */
+      border-radius: 4px;
+    
+      &.active {
+        border: 2px solid #000; /* Optional: Add a border to the active thumbnail */
+      }
 
-      .thumbnail {
-        // width: 49%;
-        // height: calc((100%) / 2); // 3 thumbnails with 10px gap
-        // height: 100%;
-        // width: 200px;
-        // position: relative;
-        overflow: hidden;
-        border-radius: 8px;
-        aspect-ratio: 1.46/1;
-        box-sizing: content-box;
-
-        img {
-          // position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 8px;
-        }
+      @media (min-width: 768px){
+        width: 220px; /* Set a fixed width */
+        height: 150px;
       }
     }
   }
