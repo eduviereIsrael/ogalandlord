@@ -1518,3 +1518,151 @@ $black: #060606;
     }
   }
 }
+
+
+
+
+.profile-container {
+  // max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  background-color: #fff;
+  height: 100%;
+
+  h2 {
+    font-size: 24px;
+  }
+
+  p {
+    color: $grey1;
+    font-size: 16px;
+  }
+}
+
+.profile-card {
+  border-radius: 8px;
+  padding: 41px 32px 33px 24px;
+  border: 1px solid #B3B3B3;
+  margin-top: 20px;
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      background-color: #eee;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+    }
+
+    .profile-info {
+      margin-left: 20px;
+
+      h3 {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      p {
+        margin: 5px 0;
+        color: #555;
+      }
+    }
+  }
+
+  .profile-body {
+    .profile-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 54px;
+
+      .profile-column {
+        flex: 0 0 46%;
+
+        h4 {
+          margin: 0;
+          font-size: 20px;
+          color: #333;
+        }
+
+        p {
+          margin: 5px 0;
+          color: #555;
+          font-size: 16px;
+        }
+
+        @media (max-width: 768px){
+          h4{
+            font-size: 14px;
+          }
+          p{
+            font-size: 12px;
+          }
+        }
+
+        .upload-box {
+          display: flex;
+          align-items: center;
+          border: 1px solid #ddd;
+          border-radius: 0px;
+          padding: 10px;
+          margin-top: 10px;
+
+          span {
+            flex-grow: 1;
+            font-size: 14px;
+          }
+
+          .uploaded-btn {
+            background-color: green;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 768px){
+      // gap: 10px;
+      .profile-row{
+        margin-bottom: 32px;
+      }
+      .docs{
+        gap: 32px;
+        flex-direction: column;
+      }
+    }
+  }
+
+  .profile-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    .edit-profile-btn {
+      background-color: #002366;
+      color: #fff;
+      border: none;
+      padding: 18px 70px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px){
+      justify-content: center;
+    }
+  }
+}

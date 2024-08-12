@@ -74,7 +74,13 @@ export const Login = () => {
   const handleGoogleSignIn = () => {
 
 
-    const newUser = { }
+    
+    const newUser = {
+      userRole: "seller",
+      authMethod: "google",
+      bussinessCert: null,
+      NIN: null,
+    }
 
     dispatch(googleSignIn(newUser))
 
@@ -380,7 +386,11 @@ export const Signup = () => {
       fullName: fullName,
       userRole,
       phoneNumber,
-      authMethod: "gmail"
+      authMethod: "gmail",
+      contactName: fullName,
+      contactEmail: email,
+      bussinessCert: null,
+      NIN: null
     }
 
     if(password.length < 6){
@@ -446,7 +456,9 @@ export const Signup = () => {
 
     const newUser = {
       userRole: userRoleG,
-      authMethod: "google"
+      authMethod: "google",
+      bussinessCert: null,
+      NIN: null,
     }
 
     dispatch(googleSignIn(newUser))

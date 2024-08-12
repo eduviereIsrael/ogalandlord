@@ -36,7 +36,7 @@ const SideNav = () => {
           <a href="/dashboard/listings" className="menu-link"> <img src={ isListingsActive? "/listings-w.svg" : '/listings.svg'} />  Listings</a>
         </li>
         <li className="menu-item" onMouseEnter={() => handleToggle(setIsProfileActive, true)} onMouseLeave={() => handleToggle(setIsProfileActive, false)}   >
-          <a href="#profile" className="menu-link"> <img src={ isProfileActive?  "/profile-w.svg" : "/profile.svg"} />  My Profile</a>
+          <a href="/dashboard/profile" className="menu-link"> <img src={ isProfileActive?  "/profile-w.svg" : "/profile.svg"} />  My Profile</a>
         </li>
 
         <li className="menu-item logout" onClick={() => {
