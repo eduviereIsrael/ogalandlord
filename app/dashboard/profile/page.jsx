@@ -74,7 +74,7 @@ const Profile = () => {
         </div>
         
         <div className="profile-footer">
-          <button className="edit-profile-btn">Edit Profile</button>
+          <button onClick={() => router.push('/dashboard/profile/edit')} className="edit-profile-btn">Edit Profile</button>
         </div>
       </div>
     </div>

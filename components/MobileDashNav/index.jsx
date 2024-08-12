@@ -80,7 +80,7 @@ const MobileDashNav = () => {
             }}
       
           >
-            <a href="#profile" className="menu-link">
+            <a href="/dashboard/profile" className="menu-link">
               {" "}
               <img
                 src={isProfileActive ? "/profile-w.svg" : "/profile.svg"}
