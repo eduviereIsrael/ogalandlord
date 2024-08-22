@@ -3,6 +3,7 @@ import StoreProvider from "./StoreProvider";
 import "./globals.scss";
 import "./components.scss";
 import AppWrapper from "@/components/App";
+import { DataComponent } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,10 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <StoreProvider>
           <AppWrapper>
+            <DataComponent>
+
             {children}
+            </DataComponent>
           </AppWrapper>
         </StoreProvider>
         </body>

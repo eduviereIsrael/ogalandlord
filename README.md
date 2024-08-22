@@ -37,4 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 TO DO: 
-Complete property card
+set the values and onChange events handler for every input in edit profile that can be edited

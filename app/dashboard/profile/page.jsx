@@ -19,10 +19,26 @@ const Profile = () => {
       
       <div className="profile-card">
         <div className="profile-header">
-          <div className="profile-avatar">
-            {/* Use an avatar image or icon here */}
+          {/* <div className="profile-avatar">
+  
             <img src="/user-icon.svg" alt="" />
-          </div>
+          </div> */}
+
+        {!currentUser?.photoURL ? (
+            <div className="profile-avatar"  >
+              <img src="/user-icon.svg" alt="" />
+            </div>
+          ) : (
+            <div className="user-profile-button" 
+            style={{
+              backgroundImage: currentUser?.photoURL ? `url(${currentUser?.photoURL.url})` : "none",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            >
+              {/* <img className="user-img" src={profilePhoto.url} alt="" /> */}
+            </div>
+          )}
           <div className="profile-info">
             <h3>{currentUser.fullName}</h3>
             <p>{currentUser.email}</p>
@@ -48,15 +64,15 @@ const Profile = () => {
             </div>
             <div className="profile-column">
               <h4>Contact E-mail</h4>
-              <p>{currentUser.email}</p>
+              <p>{currentUser.contactEmail}</p>
             </div>
           </div>
           <div className="profile-row docs">
             <div className="profile-column">
               <h4>Business Certificate <small>(e.g. CAC, SMEDAN)</small></h4>
               <div className="upload-box">
-                { currentUser.bussinessCert? <>
-                  <span>Israel ventures.pdf</span>
+                { currentUser.bussinessCert?.name? <>
+                  <span>{currentUser.bussinessCert?.name}</span>
                   <button className="uploaded-btn">Uploaded</button>
                 </> : <span>None uploaded</span>}
               </div>
@@ -64,8 +80,8 @@ const Profile = () => {
             <div className="profile-column">
               <h4>National Identification Number (NIN)</h4>
               <div className="upload-box">
-              { currentUser.NIN? <>
-                  <span>Israel ventures.pdf</span>
+              { currentUser.NIN?.name? <>
+                  <span>{currentUser.NIN?.name}</span>
                   <button className="uploaded-btn">Uploaded</button>
                 </> : <span>None uploaded</span>}
               </div>

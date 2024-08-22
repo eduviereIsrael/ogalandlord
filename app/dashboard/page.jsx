@@ -15,12 +15,12 @@ const Dashboard = () => {
   const currentUser = useAppSelector(selectCurrentUser);
   const uploadedListings = useAppSelector(selectUploadedListings);
 
-  const { fullName } = currentUser;
+  const { fullName, email, contactEmail, id } = currentUser;
   const getFirstName = (fullName) => fullName.split(' ')[0];
 
   useEffect(() => {
     // if(!uploadedListings.length > 0){
-      dispatch(fetchUploadedListings(currentUser.email))
+      dispatch(fetchUploadedListings(id))
     // }
   }, []);
 

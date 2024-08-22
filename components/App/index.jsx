@@ -50,14 +50,14 @@ const AppWrapper = ({children}) => {
     }, [currentUser, dispatch, clearDate])
   
   return (
-    <div>
+    <div style={{padding: "0", margin: "0"}} >
         {children}
 
         {signInModalOpen && <Overlay><Login /></Overlay>}
         {signUpModalOpen && <Overlay><Signup /></Overlay>}
         {passwordRecoveryModalOpen && <Overlay><ForgotPassword /></Overlay>}
         {passwordRecoverySuccess && <Overlay><PasswordReset /></Overlay>}
-        <ToastContainer />
+        {/* <ToastContainer /> */}
     </div>
   )
 }

@@ -14,7 +14,18 @@ const TopNav = () => {
     const { photoURL, fullName } = currentUser;
   return (
     <div className='user-profile-button' >
-        { photoURL? <img className='user-img' src={photoURL} alt="" /> : <span className='user-img-span' >{fullName[0]}</span> }
+        { photoURL? <div className='user-img' style={{
+          backgroundImage: `url(${photoURL.url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          // borderRadius: "50%",
+          // width: "36px",
+          // height: "36px",
+          // overflow: "hidden",
+          // display: "flex",
+          // justifyContent: "center",
+          // alignItems: "center"
+        }}  alt="" /> : <span className='user-img-span' >{fullName[0]}</span> }
         <span className='user-name' >{currentUser.fullName}</span>
     </div>
   )

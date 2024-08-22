@@ -44,6 +44,9 @@ const DescriptionInputEdit = () => {
     const handleUpdateAmenity = (amenity) => {
       dispatch(updateChosenAmeninites(amenity))
     }
+
+    const removeDuplicates = (arr) => [...new Set(arr)];
+
   return (
     <div className='description-cont' >
         <div className="input-group">
@@ -116,7 +119,7 @@ const DescriptionInputEdit = () => {
 
           <div className="checkbox-buttons">
             {  
-                allAmenities.map(amenity => (
+                removeDuplicates([...allAmenities, ...chosenAmenities]).map(amenity => (
                     <label key={amenity} onClick={() => {
                         // console.log(amenity)
                         handleUpdateAmenity(amenity)

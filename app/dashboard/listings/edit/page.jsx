@@ -4,7 +4,18 @@
 import React, { useEffect } from 'react';
 import { AddressInputEdit, DescriptionInputEdit, ImageInputEdit } from '@/components';
 import  { useAppDispatch, useAppSelector } from '@/lib/store/hooks'
-import { selectLocation, selectDetails, selectImages, selectUploadMsg, editListings , setUploadMsg, selectPrimaryImage } from '@/lib/store/slices/listingEdit.reducer';
+import { 
+    selectLocation, 
+    selectDetails, 
+    selectImages, 
+    selectUploadMsg, 
+    editListings , 
+    setUploadMsg, 
+    selectPrimaryImage,
+    selectUpdatedPrice ,
+    selectStage,
+    selectUploadDate
+} from '@/lib/store/slices/listingEdit.reducer';
 import { selectCurrentUser } from '@/lib/store/slices/user.reducer';
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -25,7 +36,9 @@ const Upload = () => {
   const currentUser = useAppSelector(selectCurrentUser)
   const uploadMsg = useAppSelector(selectUploadMsg)
   const primaryImage = useAppSelector(selectPrimaryImage);
-
+  const updatedPrice = useAppSelector(selectUpdatedPrice);
+  const stage = useAppSelector(selectStage);
+  const uploadDate = useAppSelector(selectUploadDate);
   const listingId = query.get("listing");
 
 
@@ -105,19 +118,61 @@ const Upload = () => {
         return false;
     }
 
+    const checkAndUpdatePrice = (updatedPrice, price) => {
+        // Check if any object in the updatedPrice array has a matching price
+        const priceExists = updatedPrice.some(item => item.price === price);
+      
+        // If the price exists, return the original updatedPrice array
+        if (priceExists) {
+          return updatedPrice;
+        }
+      
+        // If the price does not exist, return a new array with the existing items spread first, then the new object
+        return [
+          ...updatedPrice,
+          { price: price, date: new Date() }
+        ];
+      };
+
+      const stringToSlug = (str) => {
+        return str
+          .toLowerCase()                   // Convert to lowercase
+          .trim()                           // Trim whitespace from both ends
+          .replace(/[./]/g, '')             // Remove periods and slashes
+          .replace(/\s+/g, '-')             // Replace spaces with hyphens
+          .replace(/[^a-z0-9-]/g, '');      // Remove any other non-alphanumeric characters except hyphens
+      };
+
+      const generateRandomString = () => {
+        const chars = '123456789abcdefghijklmnopqrstuvwxyz';
+        let result = '';
+        
+        for (let i = 0; i < 4; i++) {
+          result += chars[Math.floor(Math.random() * chars.length)];
+        }
+        
+        return result;
+      };
+      
+
     // If all checks pass, dispatch uploadListing
     const listing = {
         images,
         location,
         details,
+        slug: `${stringToSlug(details.title)}-${generateRandomString()}`,
         contact: {
-            name: currentUser?.fullName,
-            email: currentUser?.email,
+            name: currentUser?.contactName? currentUser.contactName : currentUser?.fullName,
+            email: currentUser?.contactEmail? currentUser.contactEmail : currentUser?.email,
             phone: currentUser?.phoneNumber? currentUser?.phoneNumber : "",
+            id: currentUser.id,
+            url: currentUser.photoURL
         }, 
         primaryImage,
-        stage: "review",
-        id: listingId
+        stage: stage,
+        uploadDate,
+        id: listingId,
+        updatedPrice: checkAndUpdatePrice(updatedPrice, price)
     }
 
     // console.log(listing)

@@ -18,6 +18,7 @@ import {
 } from "@/lib/store/slices/user.reducer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Navbar } from '..';
 
 export const Login = () => {
   const dispatch = useAppDispatch();
@@ -78,8 +79,10 @@ export const Login = () => {
     const newUser = {
       userRole: "seller",
       authMethod: "google",
-      bussinessCert: null,
-      NIN: null,
+      bussinessCert: {},
+      NIN: {},
+      verified: false
+
     }
 
     dispatch(googleSignIn(newUser))
@@ -389,8 +392,10 @@ export const Signup = () => {
       authMethod: "gmail",
       contactName: fullName,
       contactEmail: email,
-      bussinessCert: null,
-      NIN: null
+      bussinessCert: {},
+      NIN: {},
+      verified: false
+
     }
 
     if(password.length < 6){
@@ -457,8 +462,10 @@ export const Signup = () => {
     const newUser = {
       userRole: userRoleG,
       authMethod: "google",
-      bussinessCert: null,
-      NIN: null,
+      bussinessCert: {},
+      NIN: {},
+      verified: false
+
     }
 
     dispatch(googleSignIn(newUser))
@@ -582,7 +589,8 @@ export const AuthWrapper = ({children}) => {
       : 
       
       <div className='nouser' >
-        <img src="/no-user.svg" alt="" />
+        <Navbar />
+        <img className='no-user-img' src="/no-user.svg" alt="" />
         <h1>No User Found</h1>
         <p>Kindly sign in to get access to this page</p>
         <button onClick={handleSignIn} > <img src="/user.svg" alt="" /> Sign In</button>

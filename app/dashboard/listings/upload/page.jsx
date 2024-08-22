@@ -102,18 +102,49 @@ const Upload = () => {
         return false;
     }
 
+    const stringToSlug = (str) => {
+        return str
+          .toLowerCase()                   // Convert to lowercase
+          .trim()                           // Trim whitespace from both ends
+          .replace(/[./]/g, '')             // Remove periods and slashes
+          .replace(/\s+/g, '-')             // Replace spaces with hyphens
+          .replace(/[^a-z0-9-]/g, '');      // Remove any other non-alphanumeric characters except hyphens
+      };
+
+      const generateRandomString = () => {
+        const chars = '123456789abcdefghijklmnopqrstuvwxyz';
+        let result = '';
+        
+        for (let i = 0; i < 4; i++) {
+          result += chars[Math.floor(Math.random() * chars.length)];
+        }
+        
+        return result;
+      };
+      
+
     // If all checks pass, dispatch uploadListing
     const listing = {
         images,
         location,
         details,
+        slug: `${stringToSlug(details.title)}-${generateRandomString()}`,
         contact: {
-            name: currentUser?.fullName,
-            email: currentUser?.email,
+            name: currentUser?.contactName? currentUser.contactName : currentUser?.fullName,
+            email: currentUser?.contactEmail? currentUser.contactEmail : currentUser?.email,
             phone: currentUser?.phoneNumber? currentUser?.phoneNumber : "",
+            id: currentUser.id,
+            url: currentUser.photoURL
         }, 
         primaryImage,
-        stage: "review"
+        stage: "review",
+        uploadDate: new Date(),
+        updatedPrice: [
+            {
+                price: price,
+                date: new Date(),
+            }
+        ]
     }
 
     // console.log(listing)
