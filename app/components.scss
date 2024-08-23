@@ -1993,6 +1993,10 @@ $black: #060606;
 
   .content{
     width: 70%;
+
+    @media(max-width: 768px){
+      width: 100%;
+    }
   }
 
   .contact{
@@ -2001,6 +2005,8 @@ $black: #060606;
     flex-direction: column;
     gap: 20px;
     padding-left: 40px;
+    margin-top: 32px;
+
 
  
     
@@ -2125,6 +2131,11 @@ $black: #060606;
           list-style-type: none;
         }
       }
+    }
+
+    @media(max-width: 768px){
+      width: 100%;
+      padding-left: unset;
     }
     
     
@@ -3025,6 +3036,7 @@ $black: #060606;
           padding: 14px 16px;
           color: $black;
           font-size: 14px;
+          white-space: nowrap;
         }
 
         
@@ -3034,6 +3046,7 @@ $black: #060606;
           border: none;
           outline: none;
           cursor: pointer;
+          background: none;
         }
       }
 
