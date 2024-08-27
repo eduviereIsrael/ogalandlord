@@ -47,7 +47,7 @@ const EditProfile = () => {
     
 
   useEffect(() => {
-    if ( photoURL?.url.trim() !== '') {
+    if ( photoURL?.url?.trim() !== '') {
       setProfilePhoto(prev => ({...prev,...photoURL, url: photoURL.url}));
     }
   }, [photoURL]);

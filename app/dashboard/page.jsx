@@ -54,8 +54,8 @@ const Dashboard = () => {
           </div>
         </div>    
         <ListingsStats {...getListingStats()} />
-        <div id="mobile" style={{marginTop: "64px"}} >
-            <Link href={"/dashboard/listings/upload"} >
+        <div id="mobile" style={{marginTop: "64px", width: "100%"}} >
+            <Link href={"/dashboard/listings/upload"} style={{width: "100%"}} >
               <button className="btn-link"> <img src='/upload.svg' /> Upload a Property</button>
             </Link>
           </div>
