@@ -356,7 +356,7 @@ const ListingsPage = () => {
         <Navbar />
         <div className="page-container">
           <h1> Apartment Listings</h1>
-          <div className="filter" id='desktop' >
+          <div className="filter" id='' >
               <label htmlFor="search" className="search" onClick={() => {
                 setShowSearchOutput(true);
               }} >
