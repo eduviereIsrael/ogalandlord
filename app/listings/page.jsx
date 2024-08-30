@@ -356,7 +356,7 @@ const ListingsPage = () => {
         <Navbar />
         <div className="page-container">
           <h1> Apartment Listings</h1>
-          <div className="filter">
+          <div className="filter" id='desktop' >
               <label htmlFor="search" className="search" onClick={() => {
                 setShowSearchOutput(true);
               }} >
@@ -375,7 +375,7 @@ const ListingsPage = () => {
               
               <label htmlFor="listingType" className="filter-item">
                 <img src="/house-icon.svg" alt="" />
-                <select onClick={handleInputChange} name="listingType" id="listingType">
+                <select onChange={handleInputChange} name="listingType" id="listingType">
                   <option value="">Listing type</option>
                   <option value={"sell"}>For Sale</option>
                   <option value="rent">For Rent</option>
@@ -385,7 +385,7 @@ const ListingsPage = () => {
 
               <label htmlFor="propertyType" className="filter-item">
                 <img src="/house-icon.svg" alt="" />
-                <select onClick={handleInputChange} name="propertyType" id="propertyType">
+                <select onChange={handleInputChange} name="propertyType" id="propertyType">
                   <option value="">Property type</option>
                   <option value="selfCon">Self Con</option>
                   <option value="flat">Flat</option>
@@ -395,7 +395,7 @@ const ListingsPage = () => {
 
               <label htmlFor="Bedrooms" className="filter-item">
                 <img src="/beds.svg" alt="" />
-                <select onClick={handleInputChange} name="bedrooms" id="Bedrooms">
+                <select onChange={handleInputChange} name="bedrooms" id="Bedrooms">
                 <option value={""}>Number of rooms</option>
                 <option value={1}>1</option>
                   <option value={2}>2</option>
@@ -408,7 +408,7 @@ const ListingsPage = () => {
 
               <label htmlFor="Bathrooms" className="filter-item">
                 <img src="/bathroom.svg" alt="" />
-                <select onClick={handleInputChange} name="bathrooms" id="Bathrooms">
+                <select onChange={handleInputChange} name="bathrooms" id="Bathrooms">
                 <option value={""}>Number of baths</option>
                 <option value={1}>1</option>
                   <option value={2}>2</option>
@@ -420,7 +420,7 @@ const ListingsPage = () => {
 
               <label htmlFor="minMax " className="filter-item">
                 <img src="/price-icon.svg" alt="" />
-                <select onClick={handleInputChange} name="minMaxPrice" id="minMax ">
+                <select onChange={handleInputChange} name="minMaxPrice" id="minMax ">
                   <option value={""}>Min-Max price</option>
                   <option value={[300000]}>below 300k</option>
                   <option value={[300000, 500000]}>300k - 500k</option>

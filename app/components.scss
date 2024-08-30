@@ -3029,7 +3029,8 @@ $black: #060606;
         border-radius: 4px;
         overflow-y: visible;
         cursor: pointer;
-        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.23);
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.13);
+        background-color: #fff;
 
 
         p{
@@ -3059,7 +3060,10 @@ $black: #060606;
         border-radius: 4px;
         padding-right: 16px;
         background-color: #fff;
-        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.23);
+        *{
+          background-color: #fff;
+        }
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.13);
         input{
           padding: 14px 16px;
           border: none;
