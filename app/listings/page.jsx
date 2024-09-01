@@ -304,6 +304,7 @@ const ListingsPage = () => {
   // const shomoluPlaces = findItemWithState("shom")
 
   const [showSearchOutput, setShowSearchOutput] = useState(false)
+  const [showMobileFilters, setShowMobileFilters] = useState(false)
   const [searchValue, setsearchValue] = useState("s")
   const [searchOutput, setSearchOutput] = useState([])
   const [chosenState, setChosenState] = useState('');
@@ -356,7 +357,7 @@ const ListingsPage = () => {
         <Navbar />
         <div className="page-container">
           <h1> Apartment Listings</h1>
-          <div className="filter" id='' >
+          <div className="filter" id='desktop' >
               <label htmlFor="search" className="search" onClick={() => {
                 setShowSearchOutput(true);
               }} >
@@ -472,6 +473,133 @@ const ListingsPage = () => {
                   <option value="shortlet">Shortlet</option>
                 </select>
               </label> */}
+          </div>
+          <div id='mobile' className="mobile-filter">
+            <label htmlFor="search" className="search" onClick={() => {
+                  setShowSearchOutput(true);
+                }} >
+                  <img src="/search.svg" alt=""  onClick={null} />
+                  <p>{filters.location.state? filters.location.state : "search by location"}</p>
+                  <input
+                    type="text"
+                    id="search"
+                    // disabled={true}
+                    placeholder="search by location" onClick={null} 
+                    value={chosenState}
+                    style={{display: "none"}}
+                  />
+          
+              </label>
+
+            <div className="filter-icon" onClick={() => {
+              setShowMobileFilters(prev => !prev)
+            }} >
+              <img src="/filter-icon.svg" alt="" />
+            </div>
+
+              {
+                showMobileFilters && <div className="filter-options">
+                <img src="/close.svg" className='close' alt="" onClick={() => {
+                                  setShowMobileFilters(false)
+                                }} />
+                <label htmlFor="listingType" className="filter-item">
+                  <img src="/house-icon.svg" alt="" />
+                  <select onChange={handleInputChange} name="listingType" id="listingType">
+                    <option value="">Listing type</option>
+                    <option value={"sell"}>For Sale</option>
+                    <option value="rent">For Rent</option>
+                    <option value="shortlet">Shortlet</option>
+                  </select>
+                </label>
+
+                <label htmlFor="propertyType" className="filter-item">
+                  <img src="/house-icon.svg" alt="" />
+                  <select onChange={handleInputChange} name="propertyType" id="propertyType">
+                    <option value="">Property type</option>
+                    <option value="selfCon">Self Con</option>
+                    <option value="flat">Flat</option>
+                    <option value="duplex">Duplex</option>
+                  </select>
+                </label>
+
+                <label htmlFor="Bedrooms" className="filter-item">
+                  <img src="/beds.svg" alt="" />
+                  <select onChange={handleInputChange} name="bedrooms" id="Bedrooms">
+                  <option value={""}>Number of rooms</option>
+                  <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                  </select>
+                </label>
+
+                <label htmlFor="Bathrooms" className="filter-item">
+                  <img src="/bathroom.svg" alt="" />
+                  <select onChange={handleInputChange} name="bathrooms" id="Bathrooms">
+                  <option value={""}>Number of baths</option>
+                  <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                  </select>
+                </label>
+
+                <label htmlFor="minMax " className="filter-item">
+                  <img src="/price-icon.svg" alt="" />
+                  <select onChange={handleInputChange} name="minMaxPrice" id="minMax ">
+                    <option value={""}>Min-Max price</option>
+                    <option value={[300000]}>below 300k</option>
+                    <option value={[300000, 500000]}>300k - 500k</option>
+                    <option value={[500000, 1000000]}>500k - 1m</option>
+                    <option value={[1000000, 2000000]}>1m - 2m</option>
+                    <option value={[2000000, 4000000]}>2m - 4m</option>
+                    <option value={[4000000]}>4m and above</option>
+                  
+                  </select>
+                </label>
+                <button onClick={() => {
+                  setShowMobileFilters(false)
+                }} className='primary-btn' style={{marginTop: "16px"}} >Done</button>
+
+              </div>
+              }
+
+              { showSearchOutput &&    <div className="search-output">
+                {/* {
+                  places.map((place, index) => (
+                    <div key={index}>{place}</div>
+                  ))
+                } */}
+
+                <div className="locations">
+                  <div className="header">
+                    <h3>{!chosenState? `Select a state` : `Select LGA's in ${chosenState}`}</h3>
+                    <img src="/close.svg" alt="" onClick={() => {
+                      setShowSearchOutput(false)
+                    }} />
+                  </div>
+                  <div className="container">
+                    {
+                      !chosenState? stateKeys.map((state, index) => (
+                        <div key={index} onClick={() => handleChosenState(state)}>
+                          {state}
+                        </div>
+                      )) : 
+                      nigerianStatesAndLGAs[chosenState].map((lga,  index) => (
+                        <div style={{ backgroundColor: chosenLga.includes(lga)? '#e9e9e9' : "" }} key={index} onClick={() => handleChosenLga(lga)}>
+                          {lga}
+                        </div>
+                      ))
+                    }
+                  </div>
+                  <button onClick={handleSetLocations} className='primary-btn' style={{marginTop: "16px"}} >Done</button>
+                </div>
+              </div>}
+              
+              
           </div>
           <div style={{width: "100%"}} >
 

@@ -13,6 +13,9 @@ const DetailsPage = ({ listing }) => {
   const thumbnailContainerRef = useRef();
 
   const [mainImage, setMainImage] = useState(0);
+  const [mainImageIndex, setMainImageIndex] = useState(0);
+  const [showContact, setShowContact] = useState(0);
+  
 
   const currentUser = useAppSelector(selectCurrentUser);
 
@@ -92,9 +95,19 @@ const DetailsPage = ({ listing }) => {
     setMainImage(getPrimaryImage().url);
   }, [getPrimaryImage]);
 
-  const handleMouseEnterThumbnail = (url) => {
+  const handleMouseEnterThumbnail = (url, index) => {
     setMainImage(url);
+    setMainImageIndex(index)
   };
+
+  const modifyString = (str) => {
+    const firstCharRemoved = str.substring(1); // Remove the first character
+    const prefix = "234"; // Define the prefix
+    const result = prefix.concat(firstCharRemoved); // Concatenate the prefix with the remaining string
+    return result; // Return the final result
+};
+
+//href={`whatsapp://send?text=Hi,%20I%20will%20like%20to%20get%20more%20information%20on%20this%20property%20you%20listed%20on%20OgaLandLord%20https://ogalandlord.vercel.app/listings/property/${listing.slug}&phone=${modifyString(listing.contact.phone)}`} className="whatsapp-btn">WhatsApp
 
   return (
     <div className="b-property-page">
@@ -113,10 +126,10 @@ const DetailsPage = ({ listing }) => {
           </div>
           <div className="buttons">
             <button onClick={null}>
-              <img src="/edit.svg" /> Save
+              <img src="/save.svg" /> Save
             </button>
             <button onClick={null}>
-              <img src="/edit.svg" /> Share
+              <img src="/share.svg" /> Share
             </button>
             <div
               className="more-options"
@@ -160,13 +173,13 @@ const DetailsPage = ({ listing }) => {
             {listing.images.map((image, index) => (
               <div
                 key={index}
-                className={`thumbnail ${index === 0 ? "active" : ""}`}
+                className={`thumbnail ${index === mainImageIndex ? "active" : ""}`}
                 style={{
                   backgroundImage: `url(${image.url})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
-                onClick={() => handleMouseEnterThumbnail(image.url)}
+                onClick={() => handleMouseEnterThumbnail(image.url, index)}
               />
             ))}
           </div>
@@ -249,8 +262,11 @@ const DetailsPage = ({ listing }) => {
               {/* <h3>Israel Ventures</h3> */}
             </div>
             <div className="agent-contact">
-              <button className="phone-btn">{listing.contact.phone}</button>
-              <a className="whatsapp-btn">WhatsApp</a>
+              {
+                showContact? <button className="phone-btn" onClick={() => setShowContact(prev => !prev)}  >{listing.contact.phone}</button> : <button className="phone-btn" onClick={() => setShowContact(prev => !prev)} >+234xxxxxxxxxx (show)</button>
+              }
+              
+              <a target="_blank" href={`whatsapp://send?text=Hi`} className="whatsapp-btn">WhatsApp</a>
             </div>
           </div>
 
