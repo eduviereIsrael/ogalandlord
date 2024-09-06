@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { Navbar } from '@/components'
 import { selectAllListings, setAllListings, selectFilteredListings, setLocationFilter, selectFilters, updateOtherFilter } from '@/lib/store/slices/listings.reducer';
-
+import { selectAmenitiesList } from '@/lib/store/slices/listingUpload.reducer';
 import { useAppSelector, useAppDispatch } from '@/lib/store/hooks';
 import { BuyersListingContainer } from '@/components';
 
@@ -301,14 +301,17 @@ const ListingsPage = () => {
   const allListings = useAppSelector(selectAllListings)
   const filteredListings = useAppSelector(selectFilteredListings)
   const filters = useAppSelector(selectFilters)
+  const amenities = useAppSelector(selectAmenitiesList)
   // const shomoluPlaces = findItemWithState("shom")
 
   const [showSearchOutput, setShowSearchOutput] = useState(false)
+  const [amenitiesOutput, setAmenitiesOutput] = useState(false)
   const [showMobileFilters, setShowMobileFilters] = useState(false)
   const [searchValue, setsearchValue] = useState("s")
   const [searchOutput, setSearchOutput] = useState([])
   const [chosenState, setChosenState] = useState('');
   const [chosenLga, setChosenLga] = useState([]);
+  const [chosenAmenities, setChosenAmenities] = useState([]);
 
   const handleChosenLga = (newLga) => {
     setChosenLga((prevLgas) => {
@@ -322,6 +325,22 @@ const ListingsPage = () => {
     });
   };
 
+  const handleChoosenAmen = (amenity) => {
+    // setChosenAmenities((prevLgas) => {
+      if (filters.amenitiesSelected.includes(amenity)) {
+        // Remove the string from the array if it already exists
+        dispatch(updateOtherFilter({key: "amenitiesSelected", value: filters.amenitiesSelected.filter(amen => amen !== amenity)}))
+
+        // return prevLgas.filter(amen => amen !== amenity);
+      } else {
+        // Add the string to the array if it doesn't exist
+        
+        dispatch(updateOtherFilter({key: "amenitiesSelected", value: [...filters.amenitiesSelected, amenity]}))
+        
+        // return [...prevLgas, amenity];
+      }
+    // }); 
+  }
   const handleChosenState = (newState) => {
     setChosenState(newState);
   };
@@ -343,8 +362,11 @@ const ListingsPage = () => {
     dispatch(updateOtherFilter({key: name, value: value}))
   }
 
+  const dispatchAmenities = () => {
+    console.log("dispatching amenities")
+    dispatch(updateOtherFilter({key: "amenitiesSelected", value: chosenAmenities}))
+  }
   
-
   const places = findItemWithState(searchValue)
 
   useEffect(() => {
@@ -432,6 +454,22 @@ const ListingsPage = () => {
                  
                 </select>
               </label>
+              <label htmlFor="amenities" className="search" onClick={() => {
+                setAmenitiesOutput(true);
+              }} >
+                <img src="/house-icon.svg" alt=""  onClick={null} />
+                <p>{"Amenities"}</p>
+                <input
+                  type="text"
+                  id="amenities"
+                  // disabled={true}
+                  placeholder="Amenities" onClick={null} 
+                  value={"Gym"}
+                  style={{display: "none"}}
+                />
+        
+              </label>
+              
 
               { showSearchOutput &&    <div className="search-output">
                   {/* {
@@ -464,15 +502,35 @@ const ListingsPage = () => {
                     <button onClick={handleSetLocations} className='primary-btn' style={{marginTop: "16px"}} >Done</button>
                   </div>
                 </div>}
-{/* 
-              <label htmlFor="Bedrooms" className="filter-item">
-                <img src="/search.svg" alt="" />
-                <select name="Bedrooms" id="Bedrooms">
-                  <option value="sell">Bedroom</option>
-                  <option value="rent">For Rent</option>
-                  <option value="shortlet">Shortlet</option>
-                </select>
-              </label> */}
+
+              { amenitiesOutput &&    <div className="search-output">
+                  <div className="locations">
+                    <div className="header">
+                      <h3>{`Select Amenities`}</h3>
+                      <img src="/close.svg" alt="" onClick={() => {
+                        setAmenitiesOutput(false)
+                      }} />
+                    </div>
+                    <div className="container">
+                      {
+                        amenities.map((amenity,  index) => (
+                          <div key={index} onClick={() => handleChoosenAmen(amenity)}>
+                            {amenity}
+                            {
+                              filters.amenitiesSelected.includes(amenity) && <img src="/checked.svg" style={{marginLeft: "auto"}} alt="" />
+                            }
+                          </div>
+                        ))
+                      }
+                    </div>
+                    <button onClick={() => {
+                        setAmenitiesOutput(false)
+                        // dispatchAmenities()
+
+                      }} className='primary-btn' style={{marginTop: "16px"}} >Done</button>
+                  </div>
+                </div>}
+
           </div>
           <div id='mobile' className="mobile-filter">
             <label htmlFor="search" className="search" onClick={() => {
@@ -560,6 +618,22 @@ const ListingsPage = () => {
                   
                   </select>
                 </label>
+                <label htmlFor="amenities" className="filter-item" onClick={() => {
+                  console.log("clicked")
+                  setAmenitiesOutput(true);
+                }} >
+                  <img src="/house-icon.svg" alt=""  style={{marginRight: "16px"}} onClick={null} />
+                  <p>{"Amenities"}</p>
+                <input
+                  type="text"
+                  id="amenities"
+                  // disabled={true}
+                  placeholder="Amenities" onClick={null} 
+                  value={"Gym"}
+                  style={{display: "none"}}
+                />
+        
+              </label>
                 <button onClick={() => {
                   setShowMobileFilters(false)
                 }} className='primary-btn' style={{marginTop: "16px"}} >Done</button>
@@ -598,12 +672,41 @@ const ListingsPage = () => {
                   <button onClick={handleSetLocations} className='primary-btn' style={{marginTop: "16px"}} >Done</button>
                 </div>
               </div>}
+
+              
+              { amenitiesOutput &&    <div className="search-output">
+                  <div className="locations">
+                    <div className="header">
+                      <h3>{`Select Amenities`}</h3>
+                      <img src="/close.svg" alt="" onClick={() => {
+                        setAmenitiesOutput(false)
+                      }} />
+                    </div>
+                    <div className="container">
+                      {
+                        amenities.map((amenity,  index) => (
+                          <div key={index} onClick={() => handleChoosenAmen(amenity)}>
+                            {amenity}
+                            {
+                              chosenAmenities.includes(amenity) && <img src="/checked.svg" style={{marginLeft: "auto"}} alt="" />
+                            }
+                          </div>
+                        ))
+                      }
+                    </div>
+                    <button onClick={() => {
+                        setAmenitiesOutput(false)
+                        dispatchAmenities()
+
+                      }} className='primary-btn' style={{marginTop: "16px"}} >Done</button>
+                  </div>
+                </div>}
               
               
           </div>
           <div style={{width: "100%"}} >
 
-          <BuyersListingContainer listings={filteredListings} />
+          <BuyersListingContainer listings={filteredListings}  />
           </div>
         </div>
       

@@ -5,12 +5,15 @@ import { setEditListing } from "@/lib/store/slices/listingEdit.reducer";
 import { deleteListing } from "@/lib/store/slices/listingUpload.reducer";
 import { selectCurrentUser } from "@/lib/store/slices/user.reducer";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { BuyersListingContainer, BPropertyCard } from "..";
 import { useRouter } from "next/navigation";
+import { selectFilteredListings } from "@/lib/store/slices/listings.reducer";
 
-const DetailsPage = ({ listing }) => {
+const DetailsPage = ({ listing, slug }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const thumbnailContainerRef = useRef();
+  const filteredListings = useAppSelector(selectFilteredListings)
 
   const [mainImage, setMainImage] = useState(0);
   const [mainImageIndex, setMainImageIndex] = useState(0);
@@ -109,6 +112,15 @@ const DetailsPage = ({ listing }) => {
 
 //href={`whatsapp://send?text=Hi,%20I%20will%20like%20to%20get%20more%20information%20on%20this%20property%20you%20listed%20on%20OgaLandLord%20https://ogalandlord.vercel.app/listings/property/${listing.slug}&phone=${modifyString(listing.contact.phone)}`} className="whatsapp-btn">WhatsApp
 
+  const getFirstSixElements = (arr) => {
+    console.log(arr)
+    const data = arr
+    data.length > 6 ? data.slice(0, 6) : data
+  };
+
+  const filterBySlug = (arr, slug) => slug? arr.filter(item => item.slug !== slug) : arr
+
+
   return (
     <div className="b-property-page">
       <div className="header">
@@ -124,12 +136,9 @@ const DetailsPage = ({ listing }) => {
               Ikeja, Lagos
             </p>
           </div>
-          <div className="buttons">
+          {/* <div className="buttons">
             <button onClick={null}>
               <img src="/save.svg" /> Save
-            </button>
-            <button onClick={null}>
-              <img src="/share.svg" /> Share
             </button>
             <div
               className="more-options"
@@ -141,26 +150,17 @@ const DetailsPage = ({ listing }) => {
                 border: options ? "2px solid #88b6f3" : "1px solid #ddd",
               }}
             >
-              <img src="/dots.svg" alt="More options" />
 
               {options && (
                 <div className="options">
-                  <span id="mobile" onClick={startEditing}>
-                    <img
-                      src="/edit-b.svg"
-                      alt=""
-                      style={{ marginRight: "8px" }}
-                    />
-                    Edit Listing
-                  </span>
-                  <span onClick={handleDeleteListing}>
-                    <img src="/deactivate.svg" alt="" />
-                    De-activate
+                  <span onClick={null}>
+                    <img src="/save.svg" alt="" />
+                    Save
                   </span>
                 </div>
               )}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -266,7 +266,7 @@ const DetailsPage = ({ listing }) => {
                 showContact? <button className="phone-btn" onClick={() => setShowContact(prev => !prev)}  >{listing.contact.phone}</button> : <button className="phone-btn" onClick={() => setShowContact(prev => !prev)} >+234xxxxxxxxxx (show)</button>
               }
               
-              <a target="_blank" href={`whatsapp://send?text=Hi`} className="whatsapp-btn">WhatsApp</a>
+              <a target="_blank" href={`whatsapp://send?text=Hi&phone=${modifyString(listing.contact.phone)}`} className="whatsapp-btn">WhatsApp</a>
             </div>
           </div>
 
@@ -292,6 +292,10 @@ const DetailsPage = ({ listing }) => {
           </div>
         </div>
         {/* <h1>CONTACT</h1> */}
+      </div>
+      <div className="other-listings" style={{marginTop: "70px", fontSize: "20px"}} >
+        <h4>Other Available Listings</h4>
+        <BuyersListingContainer listings={filteredListings.filter(item => item.slug !== slug).slice(0, 6) } />
       </div>
     </div>
   );

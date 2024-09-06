@@ -2,6 +2,7 @@ import React from 'react'
 import { BPropertyCard } from '..'
 
 const SellersListingContainer = ({listings}) => {
+  console.log(listings)
   return (
     <div className='b-listings-container' >
       {

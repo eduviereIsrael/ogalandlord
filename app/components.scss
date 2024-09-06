@@ -1608,6 +1608,7 @@ $black: #060606;
 }
 
 .b-listings-container{
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 16px;
@@ -2506,6 +2507,17 @@ $black: #060606;
       }
     }
   }
+
+  .other-listings{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    h2{
+      font-size: 29px;
+    }
+  }
 }
 
 
@@ -2998,8 +3010,8 @@ $black: #060606;
             display: grid;
             width: 100%;
             // grid-template-columns: ;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            // grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
             // border: 1px solid;
             padding: 0;
             gap: 8px;
@@ -3214,6 +3226,7 @@ $black: #060606;
         border-radius: 4px;
         padding-right: 16px;
         background-color: #fff;
+        height: 70px;
         *{
           background-color: #fff;
         }

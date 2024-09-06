@@ -13,7 +13,7 @@ const getData = async(slug) => {
       }
   
       // Loop through updatedPrice array and modify the date property
-      if (Array.isArray(listing.updatedPrice)) {
+      if (Array.isArray(listing?.updatedPrice)) {
         listing.updatedPrice = listing.updatedPrice.map(priceObj => {
           if (priceObj.date && priceObj.date.seconds) {
             priceObj.date = new Date(priceObj.date.seconds * 1000).toISOString();
@@ -38,7 +38,7 @@ export default async function Page({ params }) {
       <div className="page-container">
 
         {/* <h1>My Post: {params.slug}</h1> */}
-        <DetailsPage listing={listing}  />
+        <DetailsPage listing={listing} slug={params.slug} />
 
 
       </div>
