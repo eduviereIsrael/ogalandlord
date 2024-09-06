@@ -274,18 +274,18 @@ const DetailsPage = ({ listing, slug }) => {
             <h4>Safety Tips</h4>
             <ul>
               <li>1. 
-                Do not pay an inspection fee without seeing the agent and
+                Do not pay an inspection fee without seeing the House owner and
                 property.
               </li>
               <li>2.
                 Pay any fee or any upfront payment after you verify from the
                 Landlord.
               </li>
-              <li>3. Ensure you meet the Agent in an open location.</li>
+              <li>3. Ensure you meet the House owner in an open location.</li>
               <li>4.
-                The Agent does not represent Oga Landlord and Oga Landlord is
+                The House owner does not represent Oga Landlord and Oga Landlord is
                 not liable for any monetary transaction between you and the
-                Agent.
+                House owner.
               </li>
               <li>5. Make payment only when you are satisfied.</li>
             </ul>
