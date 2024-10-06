@@ -192,6 +192,7 @@ const EditProfile = () => {
         phoneNumber: phone,
         bussinessCert: uploadedCert,
         NIN: uploadedNIN,
+        verified: currentUser.verified? currentUser.verified : false,
       };
       console.log(updatedUser)
 

@@ -25,22 +25,20 @@ const SideNav = () => {
 
   return (
     <div className="sidebar">
-      {/* <div className="logo">
-        <img src="/logo.svg" alt="Logo" />
-      </div> */}
+
       <ul className="menu">
         <li className="menu-item" onMouseEnter={() => handleToggle(setIsDashboardActive, true)} onMouseLeave={() => handleToggle(setIsDashboardActive, false)}  >
-          <a href="/dashboard" className="menu-link"> <img src={ isDashboardActive? '/dashboard-w.svg' : `/dashboard.svg`}/>  Home</a>
+          <a href="/admin" className="menu-link"> <img src={ isDashboardActive? '/dashboard-w.svg' : `/dashboard.svg`}/>  Home</a>
         </li>
         <li className="menu-item"  onMouseEnter={() => handleToggle(setIsListingsActive, true)} onMouseLeave={() => handleToggle(setIsListingsActive, false)}   >
-          <a href="/dashboard/listings" className="menu-link"> <img src={ isListingsActive? "/listings-w.svg" : '/listings.svg'} />  Listings</a>
+          <a href="/admin/listings" className="menu-link"> <img src={ isListingsActive? "/listings-w.svg" : '/listings.svg'} />  Listings</a>
         </li>
         <li className="menu-item" onMouseEnter={() => handleToggle(setIsProfileActive, true)} onMouseLeave={() => handleToggle(setIsProfileActive, false)}   >
-          <a href="/dashboard/profile" className="menu-link"> <img src={ isProfileActive?  "/profile-w.svg" : "/profile.svg"} />  Profile</a>
+          <a href="/admin/kyc" className="menu-link"> <img src={ isProfileActive?  "/profile-w.svg" : "/profile.svg"} />  KYC</a>
         </li>
-        {/* <li className="menu-item" onMouseEnter={() => handleToggle(setIsProfileActive, true)} onMouseLeave={() => handleToggle(setIsProfileActive, false)}   >
-          <a href="/dashboard/profile" className="menu-link"> <img src={ isProfileActive?  "/profile-w.svg" : "/profile.svg"} />  Payments</a>
-        </li> */}
+        <li className="menu-item" onMouseEnter={() => handleToggle(setIsProfileActive, true)} onMouseLeave={() => handleToggle(setIsProfileActive, false)}   >
+          <a href="/admin/payments" className="menu-link"> <img src={ isProfileActive?  "/profile-w.svg" : "/profile.svg"} />  Payments</a>
+        </li>
 
         <li className="menu-item logout" onClick={() => {
           handleLogout()

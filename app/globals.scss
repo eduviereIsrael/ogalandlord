@@ -3,6 +3,9 @@
 
 $pri-col: #03045E;
 $grey1: #B3B3B3;
+$grey2: #949494;
+$grey4: #515151;
+$black: #060606;
 
 * {
   box-sizing: border-box;
@@ -99,6 +102,15 @@ body {
   margin: auto 0;
   width: max-content;
   align-self: center;
+}
+
+.contain{
+  width: 100%;
+  padding: 0 100px;
+
+  @media (max-width: 768px){
+    padding: 0 20px;
+  }
 }
 
 header {

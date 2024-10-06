@@ -242,9 +242,10 @@ const DetailsPage = ({ listing, slug }) => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     borderRadius: "50%",
-                    width: "70px",
-                    height: "70px",
+                    width: "60px",
+                    height: "60px",
                     overflow: "hidden",
+                    aspectRatio: "1/1"
                     // display: "flex",
                     // justifyContent: "center",
                     // alignItems: "center"

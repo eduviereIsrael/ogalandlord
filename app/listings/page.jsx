@@ -410,7 +410,7 @@ const ListingsPage = () => {
                 <img src="/house-icon.svg" alt="" />
                 <select onChange={handleInputChange} name="propertyType" id="propertyType">
                   <option value="">Property type</option>
-                  <option value="selfCon">Self Con</option>
+                  <option value="selfCon">Self Contain</option>
                   <option value="flat">Flat</option>
                   <option value="duplex">Duplex</option>
                 </select>

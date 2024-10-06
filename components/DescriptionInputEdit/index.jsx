@@ -58,18 +58,24 @@ const DescriptionInputEdit = () => {
           <textarea  onChange={handleInputChange} id="desc" value={description} name='description' rows={3} placeholder="E.g  A 2 bedroom- detached flat building beautifully built on a plot of land in a lovely secured environment of Ikeja, Lagos. It consists of 2 Bedrooms, 3 Bathrooms and 1 Garage." />
         </div>
         <div className="input-group" style={{ border: "none" }} >
-          <label>Is it a fully furnished Apartment?</label>
+        <label>How furnished is the Apartment?</label>
+          
 
             <div className="radio-buttons">
-                <label>
-                    <input  onChange={handleInputChange}  type="radio"  checked={furnished === 'true'}  name="furnished" value={true} />
+            <label>
+                    <input  onChange={handleInputChange}  type="radio"  checked={furnished === 'furnished'}  name="furnished" value={true} />
                     <span className="custom-radio"></span>
-                    Yes
+                    Fully Furnished
                 </label>
                 <label>
-                    <input  onChange={handleInputChange}  type="radio"  checked={furnished === 'false'} name="furnished" value={false} />
+                    <input  onChange={handleInputChange}  type="radio"  checked={furnished === 'partlyFurnished'} name="furnished" value={false} />
                     <span className="custom-radio"></span>
-                    No
+                    Partly Furnished
+                </label>
+                <label>
+                    <input  onChange={handleInputChange}  type="radio"  checked={furnished === 'notFurnished'} name="furnished" value={false} />
+                    <span className="custom-radio"></span>
+                    No Furnishing
                 </label>
             </div>
         </div>
@@ -79,7 +85,8 @@ const DescriptionInputEdit = () => {
               <select name='propertyType' value={propertyType} onChange={handleInputChange}  id="propertyType">
               <option value=""  >Select a type</option>
 
-              <option value="selfCon">Self Con</option>
+              <option value="selfCon">Self-Contain</option>
+              <option value="studio">Studio Apartment</option>
               <option value="flat">Flat</option>
               <option value="duplex">Duplex</option>
               {/* Add more options here */}
@@ -232,8 +239,10 @@ const DescriptionInputEdit = () => {
               <select name='paymentType' value={paymentType} onChange={handleInputChange}  id="paymentType">
               <option value=""  >Select a duration</option>
              
+                  
               <option value="Yearly">Per Year</option>
               <option value="Monthly">Per Month</option>
+              <option value="Weekly">Per Week</option>
               <option value="Daily">Per Night</option>
               <option value="Sale">Sale</option>
               {/* Add more options here */}

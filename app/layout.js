@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import StoreProvider from "./StoreProvider";
 import "./globals.scss";
+import "./index.styles.scss";
 import "./components.scss";
 import AppWrapper from "@/components/App";
 import { DataComponent } from "@/components";

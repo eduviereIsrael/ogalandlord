@@ -1,13 +1,16 @@
 import React from 'react'
-import { SPropertyCard } from '..'
+import { SPropertyCard, APropertyCard } from '..'
 
-const SellersListingContainer = ({listings}) => {
+const SellersListingContainer = ({listings, admin }) => {
   return (
     <div className='s-listings-container' >
       {
-        listings.map((listing, index) => (
+        !admin? listings.map((listing, index) => (
           <SPropertyCard key={listing.id} listing={listing} />
-        ))
+        )) : 
+        listings.map((listing, index) => (
+          <APropertyCard key={listing.id} listing={listing} />
+        )) 
       }
    
   
